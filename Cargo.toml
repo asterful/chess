@@ -10,3 +10,4 @@ keywords = ["gamedev", "chess"]
 
 
 [dependencies]
+ggez = "0.9.3"
