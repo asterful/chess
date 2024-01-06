@@ -6,7 +6,9 @@ pub mod application;
 
 fn main() -> GameResult {
     let window_setup = WindowSetup::default().title("Aster Chess").vsync(false);
-    let window_mode = WindowMode::default().borderless(true);
+    let window_mode = WindowMode::default()
+        .resizable(true)
+        .min_dimensions(640.0, 480.0);
 
     let (ctx, event_loop) = ggez::ContextBuilder::new("aster_chess", "asterful")
         .window_setup(window_setup)
