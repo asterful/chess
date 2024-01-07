@@ -3,6 +3,10 @@ use ggez::GameResult;
 use ggez::conf::{WindowMode, WindowSetup};
 
 pub mod application;
+pub mod scene;
+pub mod scenes;
+
+use scenes::main_menu::MainMenuScene;
 
 fn main() -> GameResult {
     let window_setup = WindowSetup::default().title("Aster Chess").vsync(false);
@@ -15,6 +19,7 @@ fn main() -> GameResult {
         .window_mode(window_mode)
         .build()?;
 
-    let state = application::GlobalState::new()?;
+    let start_scene = MainMenuScene {};
+    let state = application::GlobalState::new(Box::from(start_scene))?;
     event::run(ctx, event_loop, state)
 }

@@ -1,36 +1,32 @@
-use std::time::Instant;
-
 use ggez::{GameResult, GameError};
 use ggez::event::EventHandler;
 use ggez::Context;
-use ggez::graphics::{Text, DrawParam, Canvas, Color};
+
+use crate::scene::{Scene, SceneResult};
 
 pub struct GlobalState {
-    launch_time: Instant,
+    active_scene: Box<dyn Scene>,
 }
 
 impl GlobalState {
-    pub fn new() -> GameResult<GlobalState> {
-        let state = GlobalState { launch_time: Instant::now() };
+    pub fn new(scene: Box<dyn Scene>) -> GameResult<GlobalState> {
+        let state = GlobalState {
+            active_scene: scene,
+        };
         Ok(state)
     }   
 }
 
 impl EventHandler<GameError> for GlobalState {
-    fn update(&mut self, _ctx: &mut Context) -> Result<(), GameError> {
+    fn update(&mut self, ctx: &mut Context) -> Result<(), GameError> {
+        if let SceneResult::SwitchScene(scene) = self.active_scene.update(ctx) {
+            self.active_scene = scene;
+        };
         Ok(())
     }
     
     fn draw(&mut self, ctx: &mut Context) -> Result<(), GameError> {
-        let time = self.launch_time.elapsed().as_secs();
-        let fps = ctx.time.fps();
-        let time_elapsed = Text::new(format!("Time Elapsed: {time}s"));
-        let fps_display = Text::new(format!("FPS: {fps}"));
-
-        let mut canvas = Canvas::from_frame(ctx, Color::BLACK);
-        canvas.draw(&fps_display, DrawParam::from([0.0, 0.0]).color(Color::WHITE));
-        canvas.draw(&time_elapsed, DrawParam::from([0.0, 15.0]).color(Color::WHITE));
-        canvas.finish(ctx)?;
+        self.active_scene.draw(ctx)?;
         Ok(())
     }
 }
