@@ -1,2 +1,2 @@
-# Aster Chess
-Simple chess game written in Rust.
+# Chess
+Simple chess engine written in Rust.
