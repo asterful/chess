@@ -1,5 +1,5 @@
-use crate::{board::Board, position::{self, Position}};
+use crate::{board::Board, position::Position};
 
-pub fn makeMove(board: &mut Board, from: Position, to: Position) -> Result<(), &str> {
+pub fn make_move(board: &mut Board, from: Position, to: Position) -> Result<(), &str> {
     Ok(())
 }
