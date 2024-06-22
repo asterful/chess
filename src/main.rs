@@ -6,12 +6,7 @@ mod position;
 mod engine;
 
 fn main() {
-    println!("Hello, world!");
-    // Start game
+    println!("Rusty world");
     let board: Board = Board::default();
     println!("{board}");
-
-    // Get legal moves
-
-    // Execute move
 }
