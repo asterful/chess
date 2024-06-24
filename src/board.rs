@@ -12,7 +12,7 @@ pub struct CastlingRights {
 }
 
 // Contains only the information necessary to represent the state of a chess game
-// Have the same fields as the FEN notation
+// Has the same fields as the FEN notation
 pub struct Board {
     squares: [Option<Piece>; 64],
     active_color: Color,
