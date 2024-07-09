@@ -1,12 +1,11 @@
-use board::Board;
-
 mod piece;
 mod board;
 mod position;
 mod engine;
+mod game;
+mod frontend;
 
 fn main() {
-    println!("Rusty world");
-    let board: Board = Board::default();
-    println!("{board}");
+    let mut cli_client = frontend::cli::Client::new();
+    cli_client.start();
 }
